@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="UserDAO">
+
+	<resultMap id="UserResult"
+		class="com.vizzlab.todolist.biz.domain.User">
+		<result column="id" property="id"/>
+		<result column="user_name" property="userName"/>
+		<result column="password" property="password"/>
+		<result column="email" property="email"/>
+		<result column="source" property="source"/>
+		<result column="gmt_create" property="gmtCreate"/>
+	</resultMap>
+	
+	<select id="getUserList" resultMap="UserResult">
+		select 
+			id,user_name,password,email,source,gmt_create 
+		from 
+			user
+	</select>
+	
+    <insert id="addUser">
+        INSERT INTO user
+            (user_name,password)
+        VALUES
+            (#userName#, #password#)
+	</insert>
+
+    <update id="updateUser">
+        UPDATE user
+            SET user_name=#userName#,password=#password#
+         WHERE id=#id#
+	</update>
+
+    <delete id="delUserByName">
+        delete from user where user_name=#userName#
+	</delete>
+</sqlMap>

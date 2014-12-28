@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <import resource="classpath:dal/persistence.xml"/>
+   <import resource="classpath:biz/biz-dao.xml"/>
+   <import resource="classpath:biz/biz-manager.xml"/>
+   <import resource="classpath:biz/biz-ao.xml"/>
+</beans>

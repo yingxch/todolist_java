@@ -1,0 +1,37 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=gbk">
+	<title>test</title>
+</head>
+<body>
+	<h1>Test Web Application System</h1>
+	<hr>
+	<h1>velocity模板本身中文</h1>
+	<form action="/WeixinServlet/findUser.do" method="post" name="listform">
+		<input type="text" name="input">&nbsp;<input type="submit" value=" find ">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="addUserForm.do">addUser</a>
+		<table border="1">
+			<tr>
+				<td>username</td>
+				<td>password</td>
+				<td>update</td>
+				<td>delete</td>
+			</tr>
+			#if(!$users)
+				<tr>
+					<td colspan="4">no data</td>
+				</tr>
+			#else
+				#foreach($user in $users)
+				<tr>
+					<td>$user.userName</td>
+					<td>$user.password</td>
+					<td><a href="updateUserForm.do?username=${user.userName}">update</a></td>
+					<td><a href="delUser.do?username=${user.userName}">delete</a></td>
+				</tr>
+				#end
+			#end
+		</table>
+	</form>
+</body>
+</html>

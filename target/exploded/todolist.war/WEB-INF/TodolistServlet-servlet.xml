@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+<import resource="classpath:services.xml"/>
+
+<!-- =================================================================================== -->
+	<!-- Velocity 配置 -->	
+<!-- =================================================================================== -->		
+	<!--  配置Velocity引擎
+	VelocityConfigurer负责在Spring中设置Velocity引擎，这里，我们通过属性resourceLoaderPath告诉Velocity到哪里寻找它的模板
+	建议将模板放到web-inf的某个子目录里，这样可以保证这些模板不能被直接访问
+	 -->
+	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<!-- resourceLoaderPath属性通知Velocity到哪里找到velocity模板 -->
+		<property name="resourceLoaderPath" value="/WEB-INF/template/"/>
+		<!-- 处理中文 -->
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">gbk</prop>
+				<prop key="output.encoding">gbk</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 配置velocity视图解析器 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+ 		<!-- 配置模板的后缀 -->
+ 		<property name="suffix">
+			<value>.vm</value>
+		</property>
+		<!-- 处理中文乱码 -->
+		<property name="contentType">
+            <value>text/html;charset=gbk</value>
+        </property>   
+	</bean>
+
+
+<!-- =================================================================================== -->	
+	<!-- Controller层注入 本层实现Spring MVC 核心控制-->
+<!-- =================================================================================== -->	
+	<!-- 配置方法名解析器 -->
+	<bean id="methodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/login.do">login</prop>
+				<prop key="/listUser.do">listUser</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 配置控制器 url映射 -->
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/login.do">userController</prop>
+				<prop key="/listUser.do">userController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 用户管理控制器 -->
+	<bean id="userController" class="com.vizzlab.todolist.controller.UserController">
+		<property name="methodNameResolver" ref="methodNameResolver"/>
+		<!-- 注入模板名称 -->
+		<property name="page_listUser">
+			<value>listUser</value>
+		</property>
+		<!-- 注入 userAO -->
+		<property name="userAO" ref="userAO"/>
+	</bean>
+</beans>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="GBK"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd
+    ">
+
+	<context-param>
+		<param-name>loggingCharset</param-name>
+		<param-value>GBK</param-value>
+	</context-param>
+
+	<!-- 1.配置Sring MVC的核心控制器DispatcherServlet 
+		DispatcherServlet从一个xml文件中装入Spring应用程序上下文，xml文件的名称是servlet名称后面加上-sevlet，
+		在这个示例中,DispatcherServlet会从VSITest-servlet.xml文件装入应用程序上下文
+	-->
+	<servlet>
+		<servlet-name>TodolistServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>  
+            <param-name>contextConfigLocation</param-name>  
+            <param-value>/WEB-INF/TodolistServlet-servlet.xml</param-value>  
+        </init-param> 
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!--为WeixinServlet建立映射 --> 
+	<servlet-mapping> 
+		<servlet-name>TodolistServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.vm</welcome-file>
+	</welcome-file-list>
+</web-app>

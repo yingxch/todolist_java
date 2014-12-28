@@ -1,0 +1,8 @@
+com\vizzlab\todolist\biz\ao\impl\UserAOImpl.class
+com\vizzlab\todolist\biz\dao\impl\UserDAOImpl.class
+com\vizzlab\todolist\biz\ao\UserAO.class
+com\vizzlab\todolist\biz\dao\UserDAO.class
+com\vizzlab\todolist\biz\manager\UserManager.class
+com\vizzlab\todolist\biz\domain\User.class
+com\vizzlab\todolist\biz\manager\impl\UserManagerImpl.class
+com\vizzlab\todolist\controller\UserController.class
